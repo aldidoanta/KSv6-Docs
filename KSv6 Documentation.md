@@ -71,6 +71,7 @@ KS.Reward.CacheReward ( result => {
 ```
 
 **Analytics: Updating User Id and Session Id**
+
 Since KadoSaku v6 is not coupled to any analytics module, it provides a way to update user id and session id for KadoSaku analytics purposes.
 
 
