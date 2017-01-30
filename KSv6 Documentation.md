@@ -43,30 +43,29 @@ KS.Reward.CacheReward (delegate(IActionResult result) {
 ```
 > **Notes** usually the signature is provided by IDE's *intellisense*
 
+**Using lambda expression**
+
+```csharp
+KS.Reward.CacheReward ( result => {
+    if (result.IsSuccess) {
+        // TODO: Add your code here ...
+    }
+});
+```
+
 **Using anonymous callback method, checking result using Error and Cancelled property from IResult**
 
 ```csharp
-
-```
-
-**Handle Error and Cancelled property from IResult**
-```csharp
-string leaderboardId = "000000000000001";
-KS.Leaderboard.GetLeaderboardInfo (leaderboardId, delegate(ILeadeboardInfoResult result) {
-if (result.Error != null) {
-// TODO: Handle error here
-Debug.LogError(result.Error.Message);
-return; // Don't forget to return to stop program execution
-}
-
-if (result.Cancelled == false) {
-
-// TODO: Handle cancelled here
-return;
-}
-
-// If there is no Error and not cancelled
-// TODO: Add your code here ...
-Debug.Log(result.Name);
+KS.Reward.CacheReward ( result => {
+    if (result.Error != null) {
+        // Error handling
+        Debug.LogError(result.Error.Message);
+    }
+    else if (result.Cancelled != null && result.Cancelled == true) {
+        // "Cancelled" handling (only applicable to KS.Reward.ShowReward() and KS.Reward.ShowIncentivizedReward() )
+    }
+    else {
+        // "Success" handling
+    }
 });
 ```
