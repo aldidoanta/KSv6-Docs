@@ -74,6 +74,7 @@ KS.Reward.CacheReward ( result => {
 Since KadoSaku v6 is not coupled to any analytics module, it provides a way to update user id and session id for KadoSaku analytics purposes.
 
 Steps:
+
 1. Create a class that implements `KS.IAnalyticsData`
 ```csharp
 public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
@@ -81,14 +82,16 @@ public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
 
 }
 ```
-2. Call `KS.User.UpdateUserData(this);`. `KS.User.UpdateUserData()` can be called outside the implementer class, as long as the implementer class is passed as parameter.
+2. Call `KS.User.UpdateUserData(this);`.
+
+`KS.User.UpdateUserData()` can be called outside the implementer class, as long as the implementer class is passed as parameter.
 ```csharp
 void Start ()
 {
     KS.User.UpdateUserData(this);
 }
 ```
-3. Implement the two methods needed to update user Id and session Id
+3. Implement the two methods needed to update `user id` and `session id`
 ```csharp
 #region IAnalyticsData implementation
 public void getUserSession(Action<string> callback)
@@ -102,3 +105,7 @@ public void getUserId(Action<string> callback)
 }
 #endregion
 ```
+
+**Coming Up Next**
+
+list of properties, events, methods, etc.
