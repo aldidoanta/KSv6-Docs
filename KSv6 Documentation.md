@@ -1,14 +1,15 @@
-## KadoSaku v6
+## KadoSaku v6 Unity SDK
 
 ### Dependencies and Settings
 
 This SDK must be installed using **Touchten Framework Wizard**.
-It is dependent to *KadoSaku-WebClient*, its webapp counterpart.
+It depends on *KadoSaku-WebClient*, its webapp counterpart.
 
 Don't forget to setup your KadoSaku Settings in Unity Menu
 Unity Menu Bar &gt; KadoSaku &gt; Edit Core Settings
-- *Game App Id*: get from portal.touchten.com
-- *Game App Secret*: get from portal.touchten.com
+- *Game App Id*: get from KadoSaku Portal
+- *Game App Secret*: get from KadoSaku Portal
+- *Enable Test Mode*: Enable this to use KadoSaku's staging URL for testing purposes
 - *Enable KadoSaku Debug Message*: Enable this to report KadoSaku system to console
 
 ### Method Usage Example
@@ -41,8 +42,6 @@ KS.Reward.CacheReward (delegate(IActionResult result) {
     }
 });
 ```
-> **Notes** usually the signature is provided by IDE's *intellisense*
-
 **Using lambda expression**
 
 ```csharp
@@ -74,5 +73,32 @@ KS.Reward.CacheReward ( result => {
 
 Since KadoSaku v6 is not coupled to any analytics module, it provides a way to update user id and session id for KadoSaku analytics purposes.
 
+Steps:
+1. Create a class that implements `KS.IAnalyticsData`
+```csharp
+public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
+{
 
-TODO KS.IAnalyticsData, KS.User.UpdateUserData(this), IAnalyticsData implementation
+}
+```
+2. Call `KS.User.UpdateUserData(this);`. `KS.User.UpdateUserData()` can be called outside the implementer class, as long as the implementer class is passed as parameter.
+```csharp
+void Start ()
+{
+    KS.User.UpdateUserData(this);
+}
+```
+3. Implement the two methods needed to update user Id and session Id
+```csharp
+#region IAnalyticsData implementation
+public void getUserSession(Action<string> callback)
+{
+    callback("userSessionId");
+}
+
+public void getUserId(Action<string> callback)
+{
+    callback("userId");
+}
+#endregion
+```
