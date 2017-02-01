@@ -1,31 +1,67 @@
 ## KadoSaku v6 Unity SDK
 
+KadoSaku v6 Version 6.0.7.1
+
+Incorporated in Touchten Framework Version 5.5.2
+
 ### Dependencies and Settings
 
 This SDK must be installed using **Touchten Framework Wizard**.
+
 It depends on *KadoSaku-WebClient*, its webapp counterpart.
 
-Don't forget to setup your KadoSaku Settings in Unity Menu
-Unity Menu Bar &gt; KadoSaku &gt; Edit Core Settings
+Don't forget to setup your KadoSaku Settings in Unity Editor Menu
+
+`Touchten &gt; KadoSaku &gt; Edit Core Settings`
+
 - *Game App Id*: get from KadoSaku Portal
 - *Game App Secret*: get from KadoSaku Portal
 - *Enable Test Mode*: Enable this to use KadoSaku's staging URL for testing purposes
 - *Enable KadoSaku Debug Message*: Enable this to report KadoSaku system to console
 
-### Method Usage Example
+### Basic Usage
 
-**Add namespace**
+**Adding namespace**
 ```csharp
 using KadoSaku6.Api;
 ```
 
-**Using Callback Method**
+**Caching Reward**
+```csharp
+if(!KS.IsRewardReady) {
+    KS.Reward.CacheReward((result) => {
+        Debug.Log("<color=cyan>Cache incentivized reward: " + result.ToString() + "</color>");
+    });   
+} 
+```
+
+**Showing Reward**
+
+There are two types of rewards, standard reward and incentivized reward.
+
+Each incentivized reward has `inAppId`, which can be used to give in-game reward to player.
+```csharp
+string inAppId = 'inAppId';
+if(KS.IsRewardReady) {
+    KS.Reward.ShowIncentivizedReward(inAppId, (result) => {
+        Debug.Log(result.InAppReward.Id);
+        Debug.Log(result.InAppReward.CurrencyId);
+        Debug.Log(result.InAppReward.Message);
+        Debug.Log(result.InAppReward.Quantity);
+    }); 
+}
+```
+
+**Implementing callback handler**
+
+There are some ways to handle the callback:
+
+**1. Create a callback handler**
 ```csharp
 void CacheReward () {
     KS.Reward.CacheReward (onCacheResult);
 }
 
-// Create a method that satisfies the delegate
 void onCacheResult (IActionResult result) {
     if(result.IsSuccess) {
         // TODO: Add your code here ...
@@ -34,7 +70,7 @@ void onCacheResult (IActionResult result) {
 
 ```
 
-**Using Anonymous Callback Method**
+**2. Using Anonymous Callback Method**
 ```csharp
 KS.Reward.CacheReward (delegate(IActionResult result) {
     if (result.IsSuccess) {
@@ -42,7 +78,8 @@ KS.Reward.CacheReward (delegate(IActionResult result) {
     }
 });
 ```
-**Using lambda expression**
+
+**3. Using lambda expression**
 
 ```csharp
 KS.Reward.CacheReward ( result => {
@@ -69,9 +106,11 @@ KS.Reward.CacheReward ( result => {
 });
 ```
 
-**Analytics: Updating User Id and Session Id**
+### Analytics: Updating User Id and Session Id
 
 Since KadoSaku v6 is not coupled to any analytics module, it provides a way to update user id and session id for KadoSaku analytics purposes.
+
+This is optional. If you don't follow these steps, user id and session id will be an empty string, and will not be sent to KadoSaku webapp.
 
 Example:
 
@@ -101,7 +140,3 @@ public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
     #endregion
 }
 ```
-
-**Coming Up Next**
-
-list of properties, events, methods, etc.
