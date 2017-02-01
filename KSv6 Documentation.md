@@ -14,10 +14,10 @@ Don't forget to setup your KadoSaku Settings in Unity Editor Menu
 
 `Touchten > KadoSaku > Edit Core Settings`
 
-- *Game App Id*: get from KadoSaku Portal
-- *Game App Secret*: get from KadoSaku Portal
-- *Enable Test Mode*: Enable this to use KadoSaku's staging URL for testing purposes
-- *Enable KadoSaku Debug Message*: Enable this to report KadoSaku system to console
+- `Game App Id`: get from KadoSaku Portal
+- `Game App Secret`: get from KadoSaku Portal
+- `Enable Test Mode`: Enable this to use KadoSaku's staging URL for testing purposes
+- `Enable KadoSaku Debug Message`: Enable this to report KadoSaku system to console
 
 ### Basic Usage
 
