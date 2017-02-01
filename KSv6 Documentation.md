@@ -12,7 +12,7 @@ It depends on *KadoSaku-WebClient*, its webapp counterpart.
 
 Don't forget to setup your KadoSaku Settings in Unity Editor Menu
 
-`Touchten &gt; KadoSaku &gt; Edit Core Settings`
+`Touchten > KadoSaku > Edit Core Settings`
 
 - *Game App Id*: get from KadoSaku Portal
 - *Game App Secret*: get from KadoSaku Portal
