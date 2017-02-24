@@ -150,3 +150,30 @@ public class ImplAnalyticsData : MonoBehaviour, KS.IAnalyticsData
     #endregion
 }
 ```
+### Analytics: Implementing Custom Events for KadoSakuv6
+
+For analytics purposes, there are two additional custom events for KadoSakuv6.
+
+As an example, assume the implementation of sending analytics custom event has been wrapped in this method:
+
+```csharp
+SendEvent ("customEventName", customData);
+```
+
+**initKadoSaku**
+*when kadosaku v6 finish initializing in game*
+
+This custom event is called right after KadoSaku GameObject reference has been initialized. Typically, it is called in the same code block as `KS.User.UpdateUserData()` (see the previous section about Updating User Id and Session Id).
+```csharp
+void OnEnable ()
+{
+    KS.onInitCompleteE += OnInitCompleted;
+}
+
+void OnInitCompleted (InitResult result)
+{
+    SendEvent ("initKadosaku", customData);
+    KS.onInitCompleteE -= OnInitCompleted;
+}
+```
+
