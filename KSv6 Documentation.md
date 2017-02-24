@@ -183,10 +183,11 @@ void OnInitCompleted (InitResult result)
 *upon triggering kadosaku v6*
 
 This custom event consists of three trigger events:
-1. Before `KS.Reward.ShowIncentivizedReward()` is called
-2. When receiving success callback
-3. When receiving error/cancelled callback
-4. When KadoSaku webview fails to show
+
+1.  Before `KS.Reward.ShowIncentivizedReward()` is called
+2.  When receiving success callback
+3.  When receiving error/cancelled callback
+4.  When KadoSaku webview fails to show
 
 Below is an example snippet to demonstrate all those trigger events
 ```csharp
