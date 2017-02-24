@@ -123,11 +123,11 @@ public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
     //Step 2: Call KS.User.UpdateUserData(this);
     //KS.User.UpdateUserData() can be called outside the implementer class,
     //as long as the implementer class instance is passed as parameter.
-    //KS.User.UpdateUserData() must be called after KadoSaku init has been finished.
+    //KS.User.UpdateUserData() must be called after KadoSaku init has been completed.
 
     void OnEnable ()
     {
-        KS.KS.onInitCompleteE += OnInitCompleted;
+        KS.onInitCompleteE += OnInitCompleted;
     }
 
     void OnInitCompleted (InitResult result)
