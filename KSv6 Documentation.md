@@ -118,7 +118,7 @@ Example:
 
 ```csharp
 //Step 1: Create a class that implements KS.IAnalyticsData
-public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
+public class ImplAnalyticsData : MonoBehaviour, KS.IAnalyticsData
 {
     //Step 2: Call KS.User.UpdateUserData(this);
     //KS.User.UpdateUserData() can be called outside the implementer class,
