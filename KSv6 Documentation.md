@@ -161,6 +161,7 @@ SendEvent ("customEventName", customData);
 ```
 
 **initKadoSaku**
+
 *when kadosaku v6 finish initializing in game*
 
 This custom event is called right after KadoSaku GameObject reference has been initialized. Typically, it is called in the same code block as `KS.User.UpdateUserData()` (see the previous section about Updating User Id and Session Id).
@@ -177,3 +178,32 @@ void OnInitCompleted (InitResult result)
 }
 ```
 
+**kadosaku**
+
+*upon triggering kadosaku v6*
+
+This custom event consists of three trigger events:
+1. Before `KS.Reward.ShowIncentivizedReward()` is called
+2. When receiving success callback
+3. When receiving error/cancelled callback
+4. When KadoSaku webview fails to show
+
+Below is an example snippet to demonstrate all those trigger events
+```csharp
+SendEvent ("kadosaku", KS_REQUEST, ON_REQUEST);
+if(KS.IsRewardReady) {
+    KS.Reward.ShowIncentivizedReward(achievementId, onCompleted, onClosed, (result) => {
+        if(result.IsSuccess) {
+            SendEvent ("kadosaku", KS_FEEDBACK, SUCCESS_GIVEREWARD);
+        }
+        else {
+            SendEvent ("kadosaku", KS_FEEDBACK, SUCCESS_NOTGIVEREWARD);
+        }
+    });
+}
+else{
+    SendEvent ("kadosaku", KS_FEEDBACK, FAILED);
+}
+```
+
+Feel free to implement the callback handling, either by checking `result.IsSuccess` or by using the `onCompleted` and `onClosed` handlers.
