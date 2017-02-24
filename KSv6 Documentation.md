@@ -133,7 +133,7 @@ public class InheritedAnalyticsData : MonoBehaviour, KS.IAnalyticsData
     void OnInitCompleted (InitResult result)
     {
         KS.User.UpdateUserData(this);
-        KS.KS.onInitCompleteE -= OnInitCompleted;
+        KS.onInitCompleteE -= OnInitCompleted;
     }
     
     //Step 3: Implement the two methods needed to update user id and session id
