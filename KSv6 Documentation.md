@@ -189,7 +189,8 @@ This custom event consists of three trigger events:
 3.  When receiving error/cancelled callback
 4.  When KadoSaku webview fails to show
 
-Below is an example snippet to demonstrate all those trigger events
+Below is an example snippet to demonstrate all those trigger events.
+
 ```csharp
 SendEvent ("kadosaku", KS_REQUEST, ON_REQUEST);
 if(KS.IsRewardReady) {
@@ -207,4 +208,4 @@ else{
 }
 ```
 
-Feel free to implement the callback handling, either by checking `result.IsSuccess` or by using the `onCompleted` and `onClosed` handlers.
+Feel free to implement the callback handling, either by checking `result.IsSuccess` or by using the `onCompleted` and `onClosed` handlers (`onCompleted` and `onClosed` handlers will be available for version 6.0.7.2 onward).
