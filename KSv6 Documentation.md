@@ -137,15 +137,20 @@ public class ImplAnalyticsData : MonoBehaviour, KS.IAnalyticsData
     }
     
     //Step 3: Implement the two methods needed to update user id and session id
+    //As an example, we use implementation from TT-Analytics' Amazon Mobile Analytics
     #region IAnalyticsData implementation
     public void getUserSession(Action<string> callback)
     {
-        callback("userSessionId");
+        TTAnalytics.DataExtension.GetAmazonSessionId((sessionId) => {
+            callback(sessionId);
+        });
     }
 
     public void getUserId(Action<string> callback)
     {
-        callback("userId");
+        TTAnalytics.DataExtension.GetAmazonCognitoId((userId) => {
+            callback(userId);
+        });
     }
     #endregion
 }
@@ -182,7 +187,7 @@ void OnInitCompleted (InitResult result)
 
 *upon triggering kadosaku v6*
 
-This custom event consists of three trigger events:
+This custom event consists of four trigger events:
 
 1.  Before `KS.Reward.ShowIncentivizedReward()` is called
 2.  When receiving success callback
